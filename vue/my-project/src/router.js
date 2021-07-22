@@ -10,6 +10,7 @@ import after_auth from './pages/After_auth'
 import post_data from './pages/post_data'
 import graph_test from './pages/graph_test'
 import sign_up from './pages/signup_post'
+import search_code from './pages/search_code'
 
 Vue.use(Router);
 
@@ -131,6 +132,17 @@ export default new Router({
             next('/value_gets');
           }
 
+        } else {
+          next('/django_auth');
+        }
+      }
+    },
+    {
+      path: "/search_code",
+      component: search_code,
+      beforeEnter(to, from, next){
+        if (store.getters.idToken){
+          next();
         } else {
           next('/django_auth');
         }

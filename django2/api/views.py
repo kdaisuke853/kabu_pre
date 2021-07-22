@@ -307,8 +307,8 @@ def upload_file(request):
     return render(request, 'upload.html', {'form': form})
 
 def name_to_code(request):
-    if request.method == "POST":
-        target_k = request.POST['code_input']
+    if request.method == "GET":
+        target_k = request.GET['name_input']
         print(target_k)
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM api_kabu_db WHERE Name like %s", ('%'+target_k+'%',))

@@ -29,7 +29,7 @@
     <div v-if="show"> 
       <!--<button type="button" @click="datareset(), show = !show">リセット</button>-->
       <h2>{{selected}}の予測が完了しました。</h2>
-      <h3>銘柄名:{{datas_parse.name}} 予測日時:{{resdata.date}} 値段:{{resdata.predict_target}}円</h3>
+      <h3>銘柄名:{{datas_parse.name}} <br> 予測日時:{{resdata.date}} 値段:{{resdata.predict_target}}円</h3>
     </div>
   </transition>
 

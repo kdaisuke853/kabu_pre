@@ -104,11 +104,18 @@ button{
    justify-content: center;
 }
 
+/*
 body {
    background-image: url("../image/top3.jpg");
    background-size:cover;
    color: beige;
-   
+}
+*/
+
+#toppage{
+   background-image: url("../image/top3.jpg");
+   background-size:cover;
+   color: beige;
 }
 
 #button-content{

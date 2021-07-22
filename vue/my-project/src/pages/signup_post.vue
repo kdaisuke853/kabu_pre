@@ -69,6 +69,7 @@ export default {
           this.$store.commit('updateIdToken', response.data.idToken);  
           this.$router.push('/django_auth');
         console.log(response);
+        alert("ユーザ登録が完了しました、ログイン画面に遷移します")
       }).catch(error => alert(error + '\nErrormessage:ユーザ登録に失敗しました'));
 
       this.username = "";

@@ -16,6 +16,7 @@
         <b-nav-item to="/value_gets" class="header--link" v-if="isAuthenticated">株価取得(1年)</b-nav-item>
         <b-nav-item to="/post_data" class="header--link" v-if="isAuthenticated">株価予測</b-nav-item>
         <b-nav-item to="/graph_test" class="header--link" v-if="isAuthenticated">株価グラフ</b-nav-item>
+        <b-nav-item to="/search_code" class="header--link" v-if="isAuthenticated">コード検索</b-nav-item>
       </b-navbar-nav>
       
       <b-navbar-nav class="ml-auto">

@@ -44,6 +44,9 @@ services:
             MYSQL_USER: django
             MYSQL_PASSWORD: django
             TZ: 'Asia/Tokyo'
+        tty: true
+        ports:
+            - 3306:3306
         command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
         volumes:
             - mysqldata:/var/lib/mysql
@@ -57,7 +60,6 @@ services:
         volumes:
             - ./nginx/conf:/etc/nginx/conf.d
             - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
-            - /tmp/nginx_log:/var/log/nginx
         depends_on:
             - back
 
