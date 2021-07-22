@@ -1,0 +1,125 @@
+/*header {
+    padding: 20px 4% 5px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: burlywood;
+    display: flex;
+    align-items: center;
+    height: auto;
+ }
+   */
+h1 {
+    margin: 0; padding: 0;
+    font-size: 20px;
+    /*color: azure;*/
+ }
+
+h2{
+   text-align: center;
+   /*color: azure;*/
+}
+
+.container{
+   text-align: center;
+}
+
+button{
+   text-align: center;
+}
+
+ ul{
+    margin: 0;
+    /*
+    list-style: none;
+    display: flex;
+    list-style: disc;
+    */
+    padding-left: 15px;
+ }
+ .ul-align-center{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+ }
+ 
+ li {
+    margin: 0 0 0 15px;
+    font-size: 14px;
+ }
+
+ nav {
+    margin: 0 0 0 auto;
+ }
+
+ .item{
+    list-style: none;
+    display: inline-block;
+ }
+ .header--link, .header--link:visited, .header--link:hover, .header--link:active{
+    text-decoration: none;
+    color: blue;
+ }
+
+.body_content{
+   padding-top: 50px;
+    /*text-align: center;*/
+}
+
+.task_list{
+   padding-top: 30px;
+}
+
+.task_get{
+   text-align: center;
+}
+
+.task_create{
+   text-align: center;
+}
+
+.button{
+   color: cornflowerblue;
+   margin: 0 0 0 auto;
+   align-items: center;
+}
+
+#content {
+   z-index: 2;
+   width: 80%;
+   padding: 1em;
+   background: #fff;
+}
+
+#overlay {
+   z-index: 1;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+body {
+   background-image: url("../image/top3.jpg");
+   background-size:cover;
+   color: beige;
+   
+}
+
+#button-content{
+   color: fuchsia;
+}
+
+
+#login-form{
+   color: black;
+}
+
+#value_code{
+   color: black;
+}

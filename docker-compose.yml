@@ -1,0 +1,65 @@
+version: '3'
+services:
+    web:
+        container_name: django
+        build: ./dockerfiles/django_docker
+        command: 
+            python manage.py runserver 0.0.0.0:8010
+        ports:
+            - "8010:8010"
+        volumes:
+            - ./django:/code
+        depends_on:
+            - db
+
+    back:
+        container_name: djangofb
+        build: ./dockerfiles/django_docker2
+        command:
+            uwsgi --socket :8001 --wsgi-file drfapi/wsgi.py
+        ports: 
+            - "8001:8001"
+        volumes:
+            - ./django2:/code2
+        depends_on:
+            - db
+    front:
+        build: ./dockerfiles/vue_docker
+        #command: 'npm run serve'
+        tty: true
+        volumes:
+            - ./vue:/code:cached
+            - ./vue/my-project/node_modules:/app/node_modules
+        command: ash -c 'cd my-project/ && npm run serve' 
+        ports:
+            - "8080:8080"
+
+    db:
+        image: mysql:5.7    
+        restart: always
+        container_name: mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: django-db
+            MYSQL_USER: django
+            MYSQL_PASSWORD: django
+            TZ: 'Asia/Tokyo'
+        command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+        volumes:
+            - mysqldata:/var/lib/mysql
+            - ./mysql/conf.d:/etc/mysql/conf.d
+
+    nginx:
+        image: nginx:1.13
+        container_name: nginx
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx/conf:/etc/nginx/conf.d
+            - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
+            - /tmp/nginx_log:/var/log/nginx
+        depends_on:
+            - back
+
+volumes:
+    mysqldata:
