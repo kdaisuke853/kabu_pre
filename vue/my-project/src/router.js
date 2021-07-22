@@ -1,14 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './pages/Home.vue';
-import About from './pages/About.vue';
-import Login from './pages/Login.vue';
-import Register from './pages/Register.vue';
 import django_auth from './pages/django_auth.vue'
 import django_task from './pages/django_task.vue'
 import value_get from './pages/value_get.vue'
 import store from './store';
-import kasou from './pages/kasou'
 import value_gets from './pages/django_outputs'
 import after_auth from './pages/After_auth'
 import post_data from './pages/post_data'
@@ -69,17 +65,6 @@ export default new Router({
       }
     },
     {
-      path: "/kasou",
-      component: kasou,
-      beforeEnter(to, from, next){
-        if (store.getters.idToken){
-          next();
-        } else {
-          next('/django_auth');
-        }
-      }
-    },
-    {
       path: "/value_gets",
       component: value_gets,
       beforeEnter(to, from, next){
@@ -102,43 +87,8 @@ export default new Router({
       }
     },
     {
-      path: "/about",
-      component: About,
-      beforeEnter(to, from, next) {
-        if (store.getters.idToken) { //idTokenがあれば、そのまま"/about"に
-          next();
-        } else { //なければ"/login"に飛ばす
-          next("/login");
-        }
-      },
-    },
-    {
-      path: "/login",
-      component: Login,
-      beforeEnter(to, from, next) {
-        if (store.getters.idToken) {
-          next("/");
-        } else {
-          next();
-        }
-      },
-    },
-
-    {
       path: "/sign_up",
       component: sign_up,
-      beforeEnter(to, from, next) {
-        if (store.getters.idToken) {
-          next("/");
-        } else {
-          next();
-        }
-      },
-    },
-
-    {
-      path: "/register",
-      component: Register,
       beforeEnter(to, from, next) {
         if (store.getters.idToken) {
           next("/");
