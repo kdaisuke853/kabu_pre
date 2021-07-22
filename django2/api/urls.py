@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
 from api.views import TaskViewSet, UserViewSet, ManageUserView
-from api.views import loginfunc, input_func, search_value, search_values_1year, upload_file,CreateUserView
+from api.views import loginfunc, input_func, search_value, search_values_1year, upload_file,CreateUserView,name_to_code
 
 
 router = routers.DefaultRouter()
@@ -19,4 +19,5 @@ urlpatterns = [
     path('outputs/', search_values_1year, name='output_func_many'),
     path('upload/', upload_file, name='upload_file'),
     path('register/', CreateUserView.as_view(), name='register'),
+    path('serach_code/', name_to_code, name='serach_code'),
 ]

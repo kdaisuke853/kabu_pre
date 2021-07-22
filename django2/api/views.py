@@ -12,16 +12,17 @@ from .models import kabu_db
 import os
 import requests
 import re
-import csv, json, ast
-import datetime
+import csv, json
 from django.http.response import JsonResponse, HttpResponse
-from yahoo_finance_api2 import share
-from yahoo_finance_api2.exceptions import YahooFinanceError
+#from yahoo_finance_api2 import share
+#from yahoo_finance_api2.exceptions import YahooFinanceError
 import pandas as pd
 from .forms import UploadFileForm
 from django.http import HttpResponseRedirect
 import yfinance as yf
 from rest_framework.permissions import AllowAny
+from django.db import connection
+
 
 UPLOAD_DIR = os.path.dirname(os.path.abspath(__file__)) + '/static/files/'
 
@@ -220,6 +221,13 @@ def search_values_1year(request):
 
         return JsonResponse(ret_dict)
 
+    def search_name_to_code(request):
+        if request.method == "GET":
+            target = request.GET['code_input']
+        
+
+
+
     """
     if request.method == "GET":
         target = request.GET['code_input']
@@ -297,3 +305,21 @@ def upload_file(request):
         form = UploadFileForm()
 
     return render(request, 'upload.html', {'form': form})
+
+def name_to_code(request):
+    if request.method == "POST":
+        target_k = request.POST['code_input']
+        print(target_k)
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM api_kabu_db WHERE Name like %s", ('%'+target_k+'%',))
+            weather_datas = cursor.fetchall()
+            res_list = []
+            for weather_data in weather_datas:
+                res = {'Name': weather_data[2],
+                       'Code': weather_data[1],
+                       }
+
+                res_list.append(res)
+
+            json_rets = json.dumps(res_list, ensure_ascii=False)
+            return HttpResponse(json_rets)
