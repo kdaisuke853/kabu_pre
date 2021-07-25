@@ -2,6 +2,9 @@
 
     <div class="container">
       <h1>最近10日間のグラフ</h1>
+      
+      <b-button v-b-modal.modal-1 @click="datareset()" class="m-5">リセット</b-button><br>
+      {{datas.name}}
       <select v-model="selected">
         <!--
             <option value="表示したいグラフを選んでください">Please Select</option>
@@ -17,8 +20,7 @@
 
       </select>
 
-      <div id="app">
-
+      <div id="app" class="chart">
         <p v-if="selected == '表示したいグラフを選んでください'">
         </p>
 
@@ -51,6 +53,7 @@
         ></line-chart></p>
 
       {{selected}}
+      
       </div>
     </div>
 </template>
@@ -70,68 +73,73 @@ export default {
     return {
       selected: "表示したいグラフを選んでください",
       datas:JSON.parse(localStorage.getItem('datalist')),
-
-
       chartData_Open: {
         //x軸
-        labels: [datas2.Date[234],datas2.Date[235], datas2.Date[236], datas2.Date[237],datas2.Date[238], datas2.Date[239], datas2.Date[240],datas2.Date[241], datas2.Date[242], datas2.Date[243]],
+        labels: [datas2.Date[235], datas2.Date[236], datas2.Date[237],datas2.Date[238], datas2.Date[239], datas2.Date[240],datas2.Date[241], datas2.Date[242], datas2.Date[243], datas2.Date[244]],
         // データ詳細
         datasets: [
           {
           //グラフタイトル
             label: datas2.name,
             //データ値(y軸)
-            data: [datas2.Open[234],datas2.Open[235], datas2.Open[236], datas2.Open[237],datas2.Open[238], datas2.Open[239], datas2.Open[240],datas2.Open[241], datas2.Open[242], datas2.Open[243]],
+            data: [datas2.Open[235], datas2.Open[236], datas2.Open[237],datas2.Open[238], datas2.Open[239], datas2.Open[240],datas2.Open[241], datas2.Open[242], datas2.Open[243],datas2.Open[244]],
             backgroundColor: "#6090EF",
           }
         ]
       },
       chartData_Close: {
         //x軸
-        labels: [datas2.Date[234],datas2.Date[235], datas2.Date[236], datas2.Date[237],datas2.Date[238], datas2.Date[239], datas2.Date[240],datas2.Date[241], datas2.Date[242], datas2.Date[243]],
+        labels: [datas2.Date[235], datas2.Date[236], datas2.Date[237],datas2.Date[238], datas2.Date[239], datas2.Date[240],datas2.Date[241], datas2.Date[242], datas2.Date[243],datas2.Date[244]],
         // データ詳細
         datasets: [
           {
           //グラフタイトル
             label: datas2.name,
             //データ値(y軸)
-            data: [datas2.Close[234],datas2.Close[235], datas2.Close[236], datas2.Close[237],datas2.Close[238], datas2.Close[239], datas2.Close[240],datas2.Close[241], datas2.Close[242], datas2.Close[243]],
+            data: [datas2.Close[235], datas2.Close[236], datas2.Close[237],datas2.Close[238], datas2.Close[239], datas2.Close[240],datas2.Close[241], datas2.Close[242], datas2.Close[243],datas2.Close[244]],
             backgroundColor:"#98fb98",
           }
         ]
       },
       chartData_Low: {
         //x軸
-        labels: [datas2.Date[234],datas2.Date[235], datas2.Date[236], datas2.Date[237],datas2.Date[238], datas2.Date[239], datas2.Date[240],datas2.Date[241], datas2.Date[242], datas2.Date[243]],
+        labels: [datas2.Date[235], datas2.Date[236], datas2.Date[237],datas2.Date[238], datas2.Date[239], datas2.Date[240],datas2.Date[241], datas2.Date[242], datas2.Date[243],datas2.Date[244]],
         // データ詳細
         datasets: [
           {
           //グラフタイトル
             label: datas2.name,
             //データ値(y軸)
-            data: [datas2.Low[234],datas2.Low[235], datas2.Low[236], datas2.Low[237],datas2.Low[238], datas2.Low[239], datas2.Low[240],datas2.Low[241], datas2.Low[242], datas2.Low[243]],
+            data: [datas2.Low[235], datas2.Low[236], datas2.Low[237],datas2.Low[238], datas2.Low[239], datas2.Low[240],datas2.Low[241], datas2.Low[242], datas2.Low[243],datas2.Low[244]],
           }
         ]
       },
       chartData_High: {
         //x軸
-        labels: [datas2.Date[234],datas2.Date[235], datas2.Date[236], datas2.Date[237],datas2.Date[238], datas2.Date[239], datas2.Date[240],datas2.Date[241], datas2.Date[242], datas2.Date[243]],
+        labels: [datas2.Date[235], datas2.Date[236], datas2.Date[237],datas2.Date[238], datas2.Date[239], datas2.Date[240],datas2.Date[241], datas2.Date[242], datas2.Date[243],datas2.Date[244]],
         // データ詳細
         datasets: [
           {
           //グラフタイトル
             label: datas2.name,
             //データ値(y軸)
-            data: [datas2.High[234],datas2.High[235], datas2.High[236], datas2.High[237],datas2.High[238], datas2.High[239], datas2.High[240],datas2.High[241], datas2.High[242], datas2.High[243]],
+            data: [datas2.High[235], datas2.High[236], datas2.High[237],datas2.High[238], datas2.High[239], datas2.High[240],datas2.High[241], datas2.High[242], datas2.High[243], datas2.High[244]],
           }
         ]
       },
-      options: {responsive: true
-                      , maintainAspectRatio: true
+      options: {responsive: true, 
+                maintainAspectRatio: true
                       },
       addFlag: false,
     };
   },
+  methods: {
+      datareset(){
+        localStorage.clear();
+        this.content = true
+        this.$router.push('/');
+      },
+    }
 };
 </script>
 

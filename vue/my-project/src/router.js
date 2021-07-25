@@ -11,6 +11,7 @@ import post_data from './pages/post_data'
 import graph_test from './pages/graph_test'
 import sign_up from './pages/signup_post'
 import search_code from './pages/search_code'
+import candle from './pages/candlechart.vue'
 
 Vue.use(Router);
 
@@ -69,17 +70,17 @@ export default new Router({
       path: "/value_gets",
       component: value_gets,
       beforeEnter(to, from, next){
-        var strage = localStorage.getItem('datalist');
+        //var strage = localStorage.getItem('datalist');
 
         if (store.getters.idToken){
           next();
 
-          if(strage){
-            alert('1年分のデータは取得済みです。株価予測とグラフを表示機能ができます。');
-            next('/post_data');
-          } else {
-            next();
-          }
+          //if(strage){
+          //  alert('1年分のデータは取得済みです。株価予測とグラフを表示機能ができます。');
+          //  next('/post_data');
+          //} else {
+          //  next();
+          //}
 
         } else {
           next('/django_auth');
@@ -121,6 +122,25 @@ export default new Router({
     {
       path:"/graph_test",
       component: graph_test,
+      beforeEnter(to, from, next){
+        var strage = localStorage.getItem('datalist');
+        if (store.getters.idToken){
+          next();
+          if(strage){
+            next();
+          } else {
+            alert('1年分のデータを取得してください');
+            next('/value_gets');
+          }
+
+        } else {
+          next('/django_auth');
+        }
+      }
+    },
+    {
+      path:"/candle",
+      component: candle,
       beforeEnter(to, from, next){
         var strage = localStorage.getItem('datalist');
         if (store.getters.idToken){

@@ -1,9 +1,9 @@
 <template>
 <div class="container">
-  <h3>コード検索</h3>
+  <h3>コード検索<br></h3>
   <form class="search-form">
     <div class="input-group">
-        <label for="name">検索ワード(曖昧検索可能です)</label>
+        <label for="name">検索ワード(曖昧検索)</label>
         <input type="text" id="name_input" v-model="name_input">
         <button type="button" @click="post_name()">検索</button>
       </div>
@@ -41,10 +41,6 @@ computed: {
       //tokenを返す
       return this.$store.getters.idToken;
     },
-    value_code: function(){
-      //タスクゲットボタンを押す前と押したあとの変数表示部分
-      return this.value != null ? this.value :'確認ボタンを押してください'
-    },
   },
   methods: {
     post_name() {
@@ -56,7 +52,7 @@ computed: {
         }
     ).then((response) => {
         this.value = response.data
-      }).catch(error => alert(error + '\nErrormessage:このコードは存在しません'));
+      }).catch(error => alert(error + '\nErrormessage'));
       this.name_input = ""
     },
   }

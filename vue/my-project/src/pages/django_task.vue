@@ -29,6 +29,7 @@
 <script>
 
 import axios from '../axios-for-auth.js';
+
 export default {
   data: function () {
   return {

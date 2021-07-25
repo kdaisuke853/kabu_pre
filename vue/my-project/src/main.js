@@ -6,8 +6,11 @@ import Vmodal from 'vue-js-modal'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-Vue.use(BootstrapVue)
+import VueApexCharts from 'vue-apexcharts'
 
+Vue.use(BootstrapVue)
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
 Vue.config.productionTip = false
 Vue.use(Vmodal)
 

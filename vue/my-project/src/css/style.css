@@ -130,3 +130,18 @@ body {
 #value_code{
    color: black;
 }
+.chart{
+   height: "100%";
+   width: "100%";
+}
+
+.cards{
+   display: flex;
+   flex-wrap: wrap;
+  }
+  .search-form{
+     text-align: center;
+  }
+  .container{
+     text-align: center;
+  }

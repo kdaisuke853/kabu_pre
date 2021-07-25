@@ -1,18 +1,6 @@
 <template>
 <div class="container">
   <h3>株価を取得したい銘柄コードを入力してください</h3>
-  <!--
-  <form class="login-form">
-
-
-    <div v-if="!show">
-        <label for="code_input">株価コード:</label>
-        <input type="text" id="code_input" v-model="code_input">
-        <button type="button"  @click="post_code(),show = !show">送信</button>
-    </div>
-
-  </form>
-  -->
 
   <b-form-group id="input-name" label="Code:" label-for="input-name">
     <b-form-input
@@ -24,7 +12,7 @@
 
     </b-form-input>
 
-    <b-button v-b-modal.modal-1 @click="post_code(),$bvModal.show('value_code')" class="m-5">株価取得</b-button>
+    <b-button v-b-modal.modal-1 @click="post_code(),$bvModal.show('value_code'), show =!show " class="m-5">株価取得</b-button>
   </b-form-group>
     
     <b-modal id="value_code" hide-footer>
@@ -36,14 +24,9 @@
         銘柄名:{{value_code.name}} 現在価格:{{value_code.val}}円({{value_code.time}})
       </div>
 
-      <!--
-      <div v-if="show"> 
-        銘柄名:{{value_code.name}} 現在価格:{{value_code.val}}円({{value_code.time}})
-        <button type="button" @click=" show = !show">リセット</button>
-      -->
 
       <div v-if="!show">
-        株価取得に失敗しました。
+        株価取得に失敗しました。コードが存在しない可能性があります
       </div>
     
     </b-modal>
@@ -90,11 +73,12 @@ export default {
         //this.show = !this.show
         console.log(response.data)
 
-        if (response.data != "形式が違います"){
-          this.show = true
+        if (response.data === "形式が違います"){
+          this.show = false
         }
         
       }).catch(error => alert(error + '\nErrormessage:このコードは存在しません'));
+      this.show = false
       this.code_input = ""
 
     }
