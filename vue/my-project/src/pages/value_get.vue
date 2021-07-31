@@ -77,13 +77,21 @@ export default {
           this.show = false
         }
         
-      }).catch(error => alert(error + '\nErrormessage:このコードは存在しません'));
+      }).catch(error => this.$swal({
+        icon: 'error',
+        text: error +'\n株価コードを入力してください(数字4桁)'
+          }));
+
       this.show = false
       this.code_input = ""
 
     }
   else
-    alert('株価コードを入力してください(数字4桁)')
+
+    this.$swal({
+        icon: 'error',
+        text: '株価コードを入力してください(数字4桁)'
+        })
       this.show = false
     },
 

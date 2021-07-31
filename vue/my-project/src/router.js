@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './pages/Home.vue';
+//import Home from './pages/Home.vue';
 import django_auth from './pages/django_auth.vue'
 import django_task from './pages/django_task.vue'
 import value_get from './pages/value_get.vue'
@@ -20,7 +20,14 @@ export default new Router({
   routes: [    
     {
       path: "/",
-      component: Home,
+      component: django_auth,
+      beforeEnter(to, from, next){
+        if (store.getters.idToken){
+          next('/after_auth');
+        } else {
+          next();
+        }
+      }
     },
     {
       path: "/after_auth",
@@ -29,7 +36,7 @@ export default new Router({
         if (store.getters.idToken){
           next();
         } else {
-          next('/django_auth');
+          next('/');
         }
       }
     },
@@ -51,7 +58,7 @@ export default new Router({
         if (store.getters.idToken){
           next();
         } else {
-          next('/django_auth');
+          next('/');
         }
       }
     },
@@ -62,7 +69,7 @@ export default new Router({
         if (store.getters.idToken){
           next();
         } else {
-          next('/django_auth');
+          next('/');
         }
       }
     },
@@ -83,7 +90,7 @@ export default new Router({
           //}
 
         } else {
-          next('/django_auth');
+          next('/');
         }
 
       }
@@ -115,7 +122,7 @@ export default new Router({
           }
 
         } else {
-          next('/django_auth');
+          next('/');
         }
       }
     },
@@ -134,7 +141,7 @@ export default new Router({
           }
 
         } else {
-          next('/django_auth');
+          next('/');
         }
       }
     },
@@ -153,7 +160,7 @@ export default new Router({
           }
 
         } else {
-          next('/django_auth');
+          next('/');
         }
       }
     },
@@ -164,7 +171,7 @@ export default new Router({
         if (store.getters.idToken){
           next();
         } else {
-          next('/django_auth');
+          next('/');
         }
       }
     },

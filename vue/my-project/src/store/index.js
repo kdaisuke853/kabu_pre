@@ -30,7 +30,7 @@ export default new Vuex.Store({
         }
       ).then((response) => {
         commit('updateIdToken', response.data.token);
-        router.push('/');
+        router.push('/after_auth');
         //dispatch('setAuthData',{
         //  idToken: response.data.idToken,
         //  expiresIn: response.data.expiresIn,

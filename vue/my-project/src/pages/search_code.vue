@@ -1,12 +1,12 @@
 <template>
 <div class="container">
-  <h3>コード検索<br></h3>
+  <h3>コード検索</h3>
   <form class="search-form">
     <div class="input-group">
         <label for="name">検索ワード(曖昧検索)</label>
         <input type="text" id="name_input" v-model="name_input">
         <button type="button" @click="post_name()">検索</button>
-      </div>
+    </div>
   </form>
 
     <table align="center" border="1"> 

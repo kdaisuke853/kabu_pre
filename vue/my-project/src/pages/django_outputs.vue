@@ -46,7 +46,7 @@
           </div>
 
           <div v-if="!show">
-            株価取得に失敗しました。
+            株価取得に失敗しました。コードが存在しない可能性があります
           </div>
 
           </b-modal>
@@ -156,23 +156,29 @@ export default {
         }
     }).then((response) => {
         console.log(response.data);
-        //console.log(response.data.open[0])
-        //document.getElementById('wrap').insertAdjacentHTML('beforeend','時間:' + response.data.timestamp[1] + '<br>' + 'open:' + response.data.open['1']);
-        //'timestamp': str(df['timestamp']), 'open': df['open'], 'high': df['high'], 'low': df['low'],
-        //'close': df['close'], 'volume': df['volume']
         this.value = response.data
-        localStorage.setItem('datalist',JSON.stringify(response.data));
-        localStorage.setItem('code',JSON.stringify(this.code_input));
+        if (response.data === "形式が違います"){
+          this.$swal({
+              icon: "info",
+              text: '株価コードを入力してください(数字4桁)'
+          })
+          this.show = false
+        }
+        else{
+          localStorage.setItem('datalist',JSON.stringify(response.data));
+          localStorage.setItem('code',JSON.stringify(this.code_input));
+          this.show = true
+          this.content = false
+        }
+      })
 
-        //this.$router.push('/post_data');
-        this.show = !this.show
-        this.content = false
-
-      }).catch(error => alert(error + '\nErrormessage:このコードは存在しません'));
       //this.code_input = ""
       }
       else
-      alert('株価コードを入力してください(数字4桁)')
+        this.$swal({
+          icon: 'error',
+          text: '株価コードを入力してください(数字4桁)'
+        })
     },
 
     datareset(){

@@ -2,15 +2,15 @@
 <template>
 <div>
   <b-navbar toggleable="lg" type="dark" variant="dark">
-    <b-navbar-brand to="/">株プレ</b-navbar-brand>
+    <b-navbar-brand to="/" v-if="!isAuthenticated">株プレ</b-navbar-brand>
+    <b-navbar-brand to="/after_auth" v-if="isAuthenticated">株プレ</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
   
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item to="/sign_up" class="header--link" v-if="!isAuthenticated">ユーザ登録</b-nav-item>
-        <b-nav-item to="/django_auth" class="header--link" v-if="!isAuthenticated">ログイン</b-nav-item>
+        <b-nav-item to="/" class="header--link" v-if="!isAuthenticated">TOP</b-nav-item>
         <!--
         <b-nav-item to="/value_get" class="header--link" v-if="isAuthenticated" >株価取得</b-nav-item>
         <b-nav-item to="/value_gets" class="header--link" v-if="isAuthenticated">株価取得(1年)</b-nav-item>
@@ -20,7 +20,7 @@
                 <template #button-content>
                   <em>株価取得機能一覧</em>
                 </template>
-                <b-dropdown-item to="/value_get">今日の株価取得(最新)</b-dropdown-item>
+                <b-dropdown-item to="/value_get">現在の株価取得</b-dropdown-item>
                 <b-dropdown-item to="/value_gets">株価取得(直近1年)</b-dropdown-item>
             </b-nav-item-dropdown>
           </div>
@@ -90,18 +90,5 @@ export default {
 
 /* 表示アニメーションをする前のスタイル */
 /* はじめ */
-.v-enter {
-  /* 最初は表示して欲しくないので 0 */
-  opacity: 0;
-}
-/* transition している間 */
-.v-enter-active {
-  transition: opacity 1s
-}
-/* おわり */
-.v-enter-to {
-  /* 終わったら表示して欲しいので 1 */
-  opacity: 1;
-}
 
 </style>
