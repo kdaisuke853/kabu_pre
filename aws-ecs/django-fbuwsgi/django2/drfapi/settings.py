@@ -57,7 +57,9 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://127.0.0.1:8080',
     'http://localhost',
-]
+    'https://kabupresub.com',
+    'http://kabupresub.com',
+]   
 
 ROOT_URLCONF = 'drfapi.urls'
 
@@ -103,7 +105,6 @@ DATABASES = {
 }
 """
 #rds設定
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -114,7 +115,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

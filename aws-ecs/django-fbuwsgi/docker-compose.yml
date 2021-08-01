@@ -1,0 +1,21 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:1.13
+        container_name: nginx-test
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx/conf:/etc/nginx/conf.d
+            - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
+        depends_on:
+            - back
+
+    back:
+        container_name: djnago-test
+        build: ./
+        command:
+            #python /code2/manage.py migrate
+            uwsgi --socket :8001 --wsgi-file /code2/drfapi/wsgi.py
+        ports: 
+            - "8001:8001"

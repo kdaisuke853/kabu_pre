@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-pml56m_t38*&)%d=128(!ylpg2%qly%@$bbei!tny-fag2rw5=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -82,36 +82,10 @@ WSGI_APPLICATION = 'drfapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django-db',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'db',
-        'PORT': '3306'
-    }
-}
-"""
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-"""
-#rds設定
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodb',
-        'USER': 'django',
-        'PASSWORD': 'djangodjango',
-        'HOST': 'database-test.cm2vwt1sehe0.us-east-1.rds.amazonaws.com',
-        'PORT': '3306',
     }
 }
 
