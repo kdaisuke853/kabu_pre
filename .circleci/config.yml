@@ -90,4 +90,4 @@ workflows:
           # サービス名
           service-name: 'sample-alb-service'
           # containerはタスク定義で設定したコンテナ名にする
-          container-image-name-updates: "container=vue,tag=${CIRCLE_SHA1}"
+          container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
