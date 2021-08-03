@@ -56,7 +56,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           # ECSのタスク定義名
-          family: 'sample'
+          family: 'my-test'
           # ECSのクラスター名かARNのフルパス
           cluster-name: 'sample-cluster'
           # サービス名
@@ -84,7 +84,7 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           # ECSのタスク定義名
-          family: 'sample'
+          family: 'my-test'
           # ECSのクラスター名かARNのフルパス
           cluster-name: 'sample-cluster'
           # サービス名
