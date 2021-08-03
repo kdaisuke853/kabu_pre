@@ -11,6 +11,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item to="/" class="header--link" v-if="!isAuthenticated">TOP</b-nav-item>
+        <b-nav-item to="/description" class="header--link" v-if="!isAuthenticated">機能説明</b-nav-item>
         <!--
         <b-nav-item to="/value_get" class="header--link" v-if="isAuthenticated" >株価取得</b-nav-item>
         <b-nav-item to="/value_gets" class="header--link" v-if="isAuthenticated">株価取得(1年)</b-nav-item>

@@ -1,58 +1,15 @@
 from django.shortcuts import render
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework import generics
 from django.contrib.auth.models import User
-from .models import Task
-from rest_framework import viewsets
-from .serializers import TaskSerializer, UserSerializer
-from .ownpermissons import ProfilePermission
-from bs4 import BeautifulSoup
 from .models import kabu_db
 import os
-import requests
 import re
 import csv, json, ast
-import datetime
 from django.http.response import JsonResponse, HttpResponse
-from yahoo_finance_api2 import share
-from yahoo_finance_api2.exceptions import YahooFinanceError
 import pandas as pd
-from .forms import UploadFileForm
-from django.http import HttpResponseRedirect
 from fbprophet import Prophet
 import yfinance as yf
-from rest_framework.permissions import AllowAny
 
 UPLOAD_DIR = os.path.dirname(os.path.abspath(__file__)) + '/static/files/'
-
-
-# ユーザーが見れる
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (ProfilePermission,)  # permissonは制限、allowanyは誰でも
-
-class CreateUserView(generics.CreateAPIView):
-    serializer_class = UserSerializer
-    permission_classes = (AllowAny,)
-
-class ManageUserView(generics.RetrieveAPIView):
-    serializer_class = UserSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)  # 承認済みの人
-
-    def get_object(self):
-        return self.request.user
-
-
-# 認証していればタスクが見れる
-class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
-
 
 def loginfunc(request):
     context = {
@@ -62,59 +19,8 @@ def loginfunc(request):
     return render(request, 'login.html', {'context': context})
 
 
-def search_value(request):
-    if request.method == "GET":
-        # target = request.POST['code_input']
-        target = request.GET['code_input']
-        print(target)
-        target_url = 'https://www.nikkei.com/nkd/company/?scode={}'.format(target)
-        r = requests.get(target_url)
-        soup = BeautifulSoup(r.text, 'lxml')
-
-        val = soup.find('dd', attrs={'class': 'm-stockPriceElm_value now'})
-        val2 = str(val)
-
-        time_now_bf = soup.find('dt', attrs={'class': 'm-stockPriceElm_title'})
-        time_now_af = str(time_now_bf)
-
-        a = re.search(r'[0-9]*(,|[0-9])[0-9]*', val2)
-        t = re.search(r'([0-9]*:[0-9]*)', time_now_af)
-
-        if re.search(r'[0-9]*(,|[0-9])[0-9]*', val2):
-            target_val = a.group(0)
-            time_now = t.group(0)
-            name = kabu_db.objects.filter(code=target)
-            name2 = list(name.values())
-            # print(name)
-            print(name2[0]['name'])
-            name_val = name2[0]['name']
-            data = {
-                'name': name_val,
-                'val': target_val,
-                'time': time_now
-            }
-            json_ret = json.dumps(data, ensure_ascii=False)  # unicodeレスポンス阻止のためensure_ascii追加
-            return HttpResponse(json_ret)
-
-        else:
-            name_val = '銘柄がありません,コードを正しく入力してください'
-            target_val = '銘柄がありません,コードを正しく入力してください'
-            time_now = ''
-            return HttpResponse('形式が違います')
-        # print(type(name))
-        # print(type(name2))
-        # return render(request, 'output.html', {'target_val': target_val, 'time_now': time_now})
-        # ret = {"data": "val" + target_val + "time" + time_now}
-
-
 # JsonResponse(data)
 
-
-def input_func(request):
-    if request.method == "POST":
-        code_input = request.POST['code_input']
-
-    return render(request, 'input.html')
 
 
 def reserve_data(request):
@@ -277,30 +183,3 @@ def search_values_1year(request):
             pass
         return JsonResponse(ret_dict)
     """
-
-def upload_file(request):
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            f = request.FILES['file']
-            path = os.path.join(UPLOAD_DIR, f.name)
-            with open(path, 'wb+') as destination:
-                for chunk in f.chunks():
-                    destination.write(chunk)
-
-            with open(path, 'r') as destination:
-                # read csv
-                rdr = csv.reader(destination)
-                # ignore header
-                next(rdr)
-                # upsert
-                for r in rdr:
-                    ev = kabu_db()
-                    ev.code = r[1]
-                    ev.name = r[2]
-                    ev.save()
-            return HttpResponseRedirect('SUCCES')
-    else:
-        form = UploadFileForm()
-
-    return render(request, 'upload.html', {'form': form})

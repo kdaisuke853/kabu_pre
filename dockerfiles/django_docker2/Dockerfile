@@ -25,5 +25,5 @@ ADD requirements.txt /code2/
 RUN pip install -r requirements.txt
 #RUN conda install -c conda-forge fbprophet
 #RUN mv -f hdays.py /opt/conda/lib/python3.7/site-packages/fbprophet
-COPY . /code2/
+COPY ../django2 /code2/
 # ホストPCの各種ファイルをcodeディレクトリにコピーする

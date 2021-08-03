@@ -12,6 +12,7 @@ import graph_test from './pages/graph_test'
 import sign_up from './pages/signup_post'
 import search_code from './pages/search_code'
 import candle from './pages/candlechart.vue'
+import Home from './pages/Home.vue'
 
 Vue.use(Router);
 
@@ -28,6 +29,10 @@ export default new Router({
           next();
         }
       }
+    },
+    {
+      path: "/description",
+      component: Home,
     },
     {
       path: "/after_auth",

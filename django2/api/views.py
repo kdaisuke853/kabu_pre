@@ -201,30 +201,33 @@ def reserve_data(request):
 
 def search_values_1year(request):
     if request.method == "GET":
-        target = request.GET['code_input']
+        try:
+            target = request.GET['code_input']
 
-        #now = datetime.datetime.now()
-        #now = now.strftime("%y%m%d")
-        company_code = str(target) + '.T'
-        target_name = yf.Ticker(company_code)
-        target_data = target_name.history(period="1y")
-        target_data.to_csv('test.csv')
-        df = pd.read_csv('test.csv')
-        os.remove('test.csv')
+            #now = datetime.datetime.now()
+            #now = now.strftime("%y%m%d")
+            company_code = str(target) + '.T'
+            target_name = yf.Ticker(company_code)
+            target_data = target_name.history(period="1y")
+            target_data.to_csv('test.csv')
+            df = pd.read_csv('test.csv')
+            os.remove('test.csv')
 
-        ret_dict = df.to_dict()
-        #ret_json = target_data.to_json()
-        name = kabu_db.objects.filter(code=target)
-        name2 = list(name.values())
-        name_val = name2[0]['name']
-        ret_dict['name'] = name_val
+            ret_dict = df.to_dict()
+            #ret_json = target_data.to_json()
+            name = kabu_db.objects.filter(code=target)
+            name2 = list(name.values())
+            name_val = name2[0]['name']
+            ret_dict['name'] = name_val
 
-        return JsonResponse(ret_dict)
+            return JsonResponse(ret_dict)
+        except IndexError:
+            return HttpResponse('形式が違います')
 
     def search_name_to_code(request):
         if request.method == "GET":
             target = request.GET['code_input']
-        
+            
 
 
 

@@ -1,21 +1,21 @@
 FROM node:lts-alpine
 
-# 静的コンテンツを配信するシンプルな http サーバをインストールする
+# http サーバをインストールする
 RUN npm install -g http-server
 
-# カレントワーキングディレクトリとして 'app' フォルダを指定する
+# カレントワーキングディレクトリ
 WORKDIR /app
 
-# `package.json` と `package-lock.json` （あれば）を両方コピーする
+# package.jsonとpackage-lock.json両方コピー
 COPY package*.json ./
 
-# プロジェクトの依存ライブラリをインストールする
+# ライブラリをインストールする
 RUN npm install
 
-# カレントワーキングディレクトリ(つまり 'app' フォルダ)にプロジェクトのファイルやフォルダをコピーする
+# カレントワーキングディレクトリにプロジェクトのファイルやフォルダをコピーする
 COPY . .
 
-# 本番向けに圧縮しながらアプリケーションをビルドする
+# 本番向けにアプリケーションをビルド
 RUN npm run build
 
 EXPOSE 8080
