@@ -3,7 +3,7 @@ FROM continuumio/anaconda3:2019.03
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code2
 WORKDIR /code2
-ADD requirements.txt /code2/
+ADD ./aws-ecs/django-fbuwsgi/requirements.txt /code2/
 ADD hdays.py /code2/
 #COPY /django2 /code2/
 RUN pip install -r requirements.txt

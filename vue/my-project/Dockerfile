@@ -7,7 +7,7 @@ RUN npm install -g http-server
 WORKDIR /app
 
 # package.jsonとpackage-lock.json両方コピー
-COPY package*.json ./
+COPY ./vue/my-project/package*.json ./
 
 # ライブラリをインストールする
 RUN npm install
