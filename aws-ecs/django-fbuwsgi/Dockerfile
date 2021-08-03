@@ -10,10 +10,10 @@ RUN pip install -r requirements.txt
 RUN conda install -c conda-forge uwsgi
 RUN conda install -c conda-forge libiconv
 RUN conda install -c conda-forge fbprophet
-ADD django2 /code2/
+ADD ./aws-ecs/django-fbuwsgi/django2 /code2/
 RUN mv -f hdays.py /opt/conda/lib/python3.7/site-packages/fbprophet/
-RUN chmod 755 ./django2/docker-entrypoint.sh
-RUN chmod +x ./django2/docker-entrypoint.sh
+RUN chmod 755 /code2/docker-entrypoint.sh
+RUN chmod +x /code2/docker-entrypoint.sh
 ENTRYPOINT ["/code2/docker-entrypoint.sh"]
 EXPOSE 8001
 
