@@ -107,12 +107,7 @@ DATABASES = {
 #rds設定
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodb',
-        'USER': 'django',
-        'PASSWORD': 'djangodjango',
-        'HOST': 'database-test.cm2vwt1sehe0.us-east-1.rds.amazonaws.com',
-        'PORT': '3306',
+    secret
     }
 }
 # Password validation
