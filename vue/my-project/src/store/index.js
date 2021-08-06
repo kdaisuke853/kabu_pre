@@ -13,6 +13,7 @@ export default new Vuex.Store({
   getters: {
     idToken: state => state.idToken
   },
+
   mutations: {
     updateIdToken(state, idToken) { 
       state.idToken = idToken;
@@ -29,7 +30,7 @@ export default new Vuex.Store({
         }
       ).then((response) => {
         commit('updateIdToken', response.data.token);
-        router.push('/');
+        router.push('/after_auth');
         //dispatch('setAuthData',{
         //  idToken: response.data.idToken,
         //  expiresIn: response.data.expiresIn,

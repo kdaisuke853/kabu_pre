@@ -1,0 +1,93 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@6.15
+  aws-ecs: circleci/aws-ecs@2.0.0
+workflows:
+  # Djangoのデプロイ
+  djnago-uwsgi-fb-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          # リージョン
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          # ECRにリポジトリがなかったら創るか？
+          create-repo: true
+          # Dockerfleのパス(デフォルトはカレントディレクトリのパス)
+          dockerfile: ./aws-ecs/django-fbuwsgi/Dockerfile
+          # ECRのリポジトリ
+          repo: django_back
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: ci-test
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          # ECSのタスク定義名
+          family: 'my-test'
+          # ECSのクラスター名かARNのフルパス
+          cluster-name: 'sample-cluster'
+          # サービス名
+          service-name: 'sample-alb-service'
+          # containerはタスク定義で設定したコンテナ名にする
+          container-image-name-updates: "container=djnago-uwsgi-fb,tag=${CIRCLE_SHA1}"
+
+  # Vueのデプロイ
+  vue-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          # ECRにリポジトリがなかったら創るか？
+          create-repo: true
+          dockerfile: ./vue/my-project/Dockerfile
+          # ECRのリポジトリ
+          repo: vue_front
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: ci-test
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          # ECSのタスク定義名
+          family: 'my-test'
+          # ECSのクラスター名かARNのフルパス
+          cluster-name: 'sample-cluster'
+          # サービス名
+          service-name: 'sample-alb-service'
+          # containerはタスク定義で設定したコンテナ名にする
+          container-image-name-updates: "container=vue,tag=${CIRCLE_SHA1}"
+  #nginxのデプロイ
+  nginx-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          # ECRにリポジトリがなかったら創るか？
+          create-repo: true
+          dockerfile: ./aws-ecs/nginx-ecs/Dockerfile
+          # ECRのリポジトリ
+          repo: nginx_ciecle
+          tag: "${CIRCLE_SHA1}"
+          filters:
+            branches:
+              only: ci-test
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          # ECSのタスク定義名
+          family: 'my-test'
+          # ECSのクラスター名かARNのフルパス
+          cluster-name: 'sample-cluster'
+          # サービス名
+          service-name: 'sample-alb-service'
+          # containerはタスク定義で設定したコンテナ名にする
+          container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"

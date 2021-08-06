@@ -1,0 +1,8 @@
+Django==3.2.3
+djangorestframework
+django-cors-headers
+bs4
+yahoo_finance_api2
+yfinance
+PyMySQL
+pandas==1.1.5

@@ -1,0 +1,8 @@
+version: '3'
+services:
+    web:
+        command: 
+            python manage.py migrate
+            python manage.py runserver 0.0.0.0:8010
+        ports:
+            - "8010:8010"

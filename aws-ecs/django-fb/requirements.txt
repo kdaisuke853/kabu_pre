@@ -1,0 +1,5 @@
+Django==3.2.3
+djangorestframework
+django-cors-headers
+pandas
+PyMySQL

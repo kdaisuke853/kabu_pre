@@ -15,6 +15,7 @@ RUN npm install
 # ディレクトリを移動する
 WORKDIR /code
 
+RUN cd my-project
 # ポート8080番を開放する
 EXPOSE 8080
 

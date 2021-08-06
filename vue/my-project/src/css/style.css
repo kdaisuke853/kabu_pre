@@ -104,11 +104,18 @@ button{
    justify-content: center;
 }
 
+/*
 body {
    background-image: url("../image/top3.jpg");
    background-size:cover;
    color: beige;
-   
+}
+*/
+
+#toppage{
+   background-image: url("../image/top3.jpg");
+   background-size:cover;
+   color: beige;
 }
 
 #button-content{
@@ -122,4 +129,35 @@ body {
 
 #value_code{
    color: black;
+}
+.chart{
+   height: "100%";
+   width: "100%";
+}
+
+.cards{
+   display: flex;
+   flex-wrap: wrap;
+  }
+  .search-form{
+     text-align: center;
+  }
+  .container{
+     text-align: center;
+  }
+
+  body{
+   background-image: url("../image/top3.jpg");
+   /*background-color:darkslateblue;*/
+   background-size: cover;
+   background-position: center center;
+   width: 100%;
+   height: 50vh;
+}
+
+
+.container{
+   background-color:white;
+   border: 2px solid;
+   padding : 20px ;
 }

@@ -1,6 +1,6 @@
 <template>
   
-  <div class="container_t">
+  <div class="container">
     <h2>タスク管理ページです</h2>
     <div class="task_get">
     <!--<div id ='wrap'> <p>トークン表示</p></div>-->
@@ -29,6 +29,7 @@
 <script>
 
 import axios from '../axios-for-auth.js';
+
 export default {
   data: function () {
   return {
@@ -70,6 +71,7 @@ export default {
     }
     console.log(`${this.idToken}`)
     console.log(this.title)
+    if (this.title){
     axios.post(
       "/api/tasks/", data,
       {
@@ -81,11 +83,22 @@ export default {
     )
     .then(response => {
       console.log(response);
+      this.$swal({
+        icon: 'success',
+        text: 'タスクが登録されました'
+        })
     })
     .catch(error =>{
       console.log(error);
     })
     this.title = "";
+  }
+  else{
+      this.$swal({
+        icon: 'error',
+        text: 'タスク名が空欄です'
+        })
+    }
   },
 
 
@@ -103,8 +116,10 @@ export default {
     })
     .catch(error =>{
       console.log(error);
-      alert(error + '\n既に存在しないタスクです')
-
+      this.$swal({
+        icon: 'error',
+        text: '既に存在しないタスクです'
+        })
     })
     this.title = "";
   },
