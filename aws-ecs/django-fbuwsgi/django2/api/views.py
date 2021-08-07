@@ -314,8 +314,8 @@ def name_to_code(request):
             code_datas = cursor.fetchall()
             res_list = []
             for code_data in code_datas:
-                res = {'Name': code_data[2],
-                       'Code': code_data[1],
+                res = {'Name': code_data[1],
+                       'Code': code_data[0],
                        }
 
                 res_list.append(res)
