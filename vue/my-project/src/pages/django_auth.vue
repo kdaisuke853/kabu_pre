@@ -3,7 +3,7 @@
 <div class="container">
   <div class="home-hero__content">
         <div class="center-block">
-        <h2 class="m-5">株プレTEST</h2>
+        <h2 class="m-5">株プレ</h2>
         <b-button v-b-modal.modal-1 @click="$bvModal.show('register-form')" class="m-5">ユーザ登録</b-button>
 
         <b-modal id="register-form" hide-footer>
