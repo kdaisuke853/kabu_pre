@@ -8,8 +8,8 @@
 また株価以外のデータにおいても予測できるようなアプリを目指しています。
 
 ## URL
-URL:https://kabupresub.com/
-ユーザー登録をしてもらい、そのアカウントでログインできます。
+URL:https://kabupresub.com/  
+ユーザー登録をしてもらい、そのアカウントでログインできます  
 ![alt](https://github.com/kdaisuke853/kabu_pre/blob/master/%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E7%94%BB%E9%9D%A2.png)
 
 ![alt](https://github.com/kdaisuke853/kabu_pre/blob/master/test3.png)
