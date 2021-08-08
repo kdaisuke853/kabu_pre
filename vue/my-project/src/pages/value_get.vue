@@ -12,7 +12,7 @@
 
     </b-form-input>
 
-    <b-button v-b-modal.modal-1 @click="post_code(),$bvModal.show('value_code'), show =!show " class="m-5">株価取得</b-button>
+    <b-button v-b-modal.modal-1 @click="post_code(),$bvModal.show('value_code')" class="m-5">株価取得</b-button>
   </b-form-group>
     
     <b-modal id="value_code" hide-footer>
@@ -72,7 +72,7 @@ export default {
         this.value = response.data
         //this.show = !this.show
         console.log(response.data)
-
+        this.show = true
         if (response.data === "形式が違います"){
           this.show = false
         }
