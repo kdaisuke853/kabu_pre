@@ -17,8 +17,13 @@ import Home from './pages/Home.vue'
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
-  routes: [    
+  //mode: "history",
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: "*",
+      redirect: '/',
+    },
     {
       path: "/",
       component: django_auth,
