@@ -310,12 +310,12 @@ def name_to_code(request):
         target_k = request.GET['name_input']
         print(target_k)
         with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM api_kabu_db WHERE Name like %s", ('%'+target_k+'%',))
-            weather_datas = cursor.fetchall()
+            cursor.execute("SELECT DISTINCT Code, Name FROM api_kabu_db WHERE Name like %s", ('%'+target_k+'%',))
+            code_datas = cursor.fetchall()
             res_list = []
-            for weather_data in weather_datas:
-                res = {'Name': weather_data[2],
-                       'Code': weather_data[1],
+            for code_data in code_datas:
+                res = {'Name': code_data[1],
+                       'Code': code_data[0],
                        }
 
                 res_list.append(res)

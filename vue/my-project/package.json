@@ -25,6 +25,7 @@
     "vue-router": "^3.5.1",
     "vue-simple-spinner": "^1.2.10",
     "vue-sweetalert2": "^5.0.2",
+    "vuetify": "^2.5.8",
     "vuex": "^3.6.2"
   },
   "devDependencies": {

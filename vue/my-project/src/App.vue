@@ -9,6 +9,7 @@
   
 
     <b-collapse id="nav-collapse" is-nav>
+
       <b-navbar-nav>
         <b-nav-item to="/" class="header--link" v-if="!isAuthenticated">TOP</b-nav-item>
         <b-nav-item to="/description" class="header--link" v-if="!isAuthenticated">機能説明</b-nav-item>
@@ -54,6 +55,7 @@
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
+
   <div class="body_content">
     <router-view></router-view>
   </div>
@@ -62,11 +64,15 @@
   
 
 <script>
+  //import Footer from './modules/Footer.vue'
+
 export default {
+  //component: {Footer},
   data(){
     return {
-      show: true
+      show: true,
     };
+    
   },
 
   methods: {
