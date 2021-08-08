@@ -83,7 +83,7 @@ export default {
             label: datas2.name,
             //データ値(y軸)
             data: [datas2.Open[235], datas2.Open[236], datas2.Open[237],datas2.Open[238], datas2.Open[239], datas2.Open[240],datas2.Open[241], datas2.Open[242], datas2.Open[243],datas2.Open[244]],
-            backgroundColor: "#6090EF",
+            
           }
         ]
       },
@@ -97,7 +97,7 @@ export default {
             label: datas2.name,
             //データ値(y軸)
             data: [datas2.Close[235], datas2.Close[236], datas2.Close[237],datas2.Close[238], datas2.Close[239], datas2.Close[240],datas2.Close[241], datas2.Close[242], datas2.Close[243],datas2.Close[244]],
-            backgroundColor:"#98fb98",
+            
           }
         ]
       },
