@@ -11,9 +11,9 @@
     <b-collapse id="nav-collapse" is-nav>
 
       <b-navbar-nav>
+        <!--
         <b-nav-item to="/" class="header--link" v-if="!isAuthenticated">TOP</b-nav-item>
         <b-nav-item to="/description" class="header--link" v-if="!isAuthenticated">機能説明</b-nav-item>
-        <!--
         <b-nav-item to="/value_get" class="header--link" v-if="isAuthenticated" >株価取得</b-nav-item>
         <b-nav-item to="/value_gets" class="header--link" v-if="isAuthenticated">株価取得(1年)</b-nav-item>
         -->
@@ -59,12 +59,24 @@
   <div class="body_content">
     <router-view></router-view>
   </div>
+  <!-- Footer -->
+  <hr>
+  <div class="footer">
+    <footer color="blue-grey" class="page-footer font-small lighten-5 pt-0">
+      <div class="footer-copyright text-center py-3">
+        <container fluid>
+          &copy; 2021 Copyright:  daisuke kawakami
+        </container>
+      </div>
+    </footer>
+  </div>
+  <!-- Footer -->
 </div>
 </template>
   
 
 <script>
-  //import Footer from './modules/Footer.vue'
+//import Footer from './modules/Footer.vue';
 
 export default {
   //component: {Footer},

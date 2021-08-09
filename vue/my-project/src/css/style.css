@@ -67,12 +67,12 @@ button{
     text-decoration: none;
     color: blue;
  }
-
+ /*
 .body_content{
-   padding-top: 50px;
-    /*text-align: center;*/
+  padding-top: 50px;
+    text-align: center;
 }
-
+*/
 .task_list{
    padding-top: 30px;
 }
@@ -119,10 +119,15 @@ body {
 }
 */
 
-#toppage{
+.mytop{
    background-image: url("../image/top3.jpg");
-   background-size:cover;
-   color: beige;
+   background-blend-mode: lighten;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   width: 100%;
+   height: 50vmax;
+   border: 4px solid;
 }
 
 #button-content{
@@ -151,9 +156,10 @@ body {
   }
 
   body{
-   background-image: url("../image/top3.jpg");
+   /*background-image: url("../image/top3.jpg");*/
    background-size: cover;
    background-position: center center;
+   padding-top: 50px;
    width: 100%;
    height: 50vh;
 }
@@ -170,10 +176,76 @@ body {
 
 
 .container{
+   /*
    background-color:white;
-   border: 2px solid;
+   */
    padding : 20px ;
    text-align: center;
+}
+.top_content{
+   color: #fff;
+   text-align:center;
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   margin: auto;
+   height: 30.5rem;
+   background-color: rgba(65, 72, 85, 0.55);
+   width:  800px;
+}
+.top_msg{
+   padding-top: 15%;
+   font-size: 50px;
+}
+.top_name{
+   font-size: 30px;
+}
+
+.discription {
+   width: 100%;
+   height: 150px;
+   color: #232323;
+   font-size: 1rem;
+   line-height: 35px;
+   letter-spacing: 0.1rem;
+   text-align: center;
+   padding-top: 50px;
+ }
+
+
+ .features{
+   width: 100%;
+   /*
+   height: 360px;
+   padding: 48px 0 0 0;
+   margin: 30px 0 0 0;
+   */
+   margin-top: 30px;
+   padding-top: 48px;
+   text-align: center;
+ }
+
+ .features_list {
+   display: flex;
+   padding-left: 30px;
+   margin-top: 30px;
+   text-align: center;
+   width: 100%;
+ }
+
+.button_top{
+   margin-top: 100px;
+}
+
+.after_menu{
+   margin-top: 30px;
+}
+.footer{
+}
+
+footer{
 }
 
 #name_input{
