@@ -12,6 +12,7 @@
       </p>
       <b-button v-b-modal.modal-1 @click="$bvModal.show('register-form')" class="m-5">ユーザ登録</b-button>
       <b-button v-b-modal.modal-1 @click="$bvModal.show('login-form')" class="m-5">ログイン</b-button>
+      <b-button v-b-modal.modal-1 @click="guestlogin()" class="m-5">ゲストログイン</b-button>
     </div>
   </div>
 </div>
@@ -249,8 +250,13 @@ export default {
       this.password = "";
       }
     },
-  }
-};
+    guestlogin() {
+        this.$store.dispatch('guestlogin', {
+        returnSecureToken: true
+        });
+      }
+    },
+  };
 </script>
 
 <style>
