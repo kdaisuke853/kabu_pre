@@ -1001,14 +1001,15 @@ export default {
  "x":  datas.Date[242],
  "y": [datas.Open[242], datas.High[242], datas.Low[242], datas.Close[242]]
 },
-{
- "x":  datas.Date[243],
- "y": [datas.Open[243], datas.High[243], datas.Low[243], datas.Close[243]]
-},
-{
- "x":  datas.Date[244],
- "y": [datas.Open[244], datas.High[244], datas.Low[244], datas.Close[244]]
-},
+
+//{
+// "x":  datas.Date[243],
+// "y": [datas.Open[243], datas.High[243], datas.Low[243], datas.Close[243]]
+//},
+//{
+// "x":  datas.Date[244],
+// "y": [datas.Open[244], datas.High[244], datas.Low[244], datas.Close[244]]
+//},
         ]
       }],
     }
