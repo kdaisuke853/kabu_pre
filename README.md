@@ -69,7 +69,8 @@ URL:https://kabupresub.com/
 ## 何ができるのか  
 ①株価コード検索  
   
-https://user-images.githubusercontent.com/80162502/128960211-d8c62845-c448-4386-9b69-924e378b47e6.mov
+https://user-images.githubusercontent.com/80162502/128960211-d8c62845-c448-4386-9b69-924e378b47e6.mov　　
+　　
 　　
 ②株価取得(現在価格・1年分)　　
 　　
