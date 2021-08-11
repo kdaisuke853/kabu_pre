@@ -70,3 +70,6 @@ URL:https://kabupresub.com/
 ①株価コード検索  
   
 https://user-images.githubusercontent.com/80162502/128960211-d8c62845-c448-4386-9b69-924e378b47e6.mov
+
+
+![demo]()
