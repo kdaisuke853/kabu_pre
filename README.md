@@ -77,3 +77,6 @@ https://user-images.githubusercontent.com/80162502/128960211-d8c62845-c448-4386-
   
 ### ③株価グラフ表示機能  
 ![demo2](https://github.com/kdaisuke853/kabu_pre/blob/master/graph.gif)
+
+### ④株価予測機能  
+![demo3](https://github.com/kdaisuke853/kabu_pre/blob/master/predict.gif)
