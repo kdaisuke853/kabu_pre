@@ -67,3 +67,6 @@ URL:https://kabupresub.com/
 | 13 | 株価コード表アップロード機能|
 
 ## 何ができるのか
+
+https://user-images.githubusercontent.com/80162502/128960211-d8c62845-c448-4386-9b69-924e378b47e6.mov
+
