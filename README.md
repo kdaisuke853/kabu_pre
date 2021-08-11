@@ -72,4 +72,4 @@ URL:https://kabupresub.com/
 https://user-images.githubusercontent.com/80162502/128960211-d8c62845-c448-4386-9b69-924e378b47e6.mov
 
 
-![demo]()
+![demo](https://github.com/kdaisuke853/kabu_pre/blob/master/%E6%A0%AA%E4%BE%A1%E5%8F%96%E5%BE%97.gif)
