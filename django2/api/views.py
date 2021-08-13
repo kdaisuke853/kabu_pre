@@ -22,6 +22,9 @@ from django.http import HttpResponseRedirect
 import yfinance as yf
 from rest_framework.permissions import AllowAny
 from django.db import connection
+from matplotlib import pyplot as plt
+from matplotlib.dates import MonthLocator, num2date
+from matplotlib.ticker import FuncFormatter
 
 
 UPLOAD_DIR = os.path.dirname(os.path.abspath(__file__)) + '/static/files/'

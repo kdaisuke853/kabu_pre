@@ -31,14 +31,22 @@ export default new Vuex.Store({
       ).then((response) => {
         commit('updateIdToken', response.data.token);
         router.push('/after_auth');
-        //dispatch('setAuthData',{
-        //  idToken: response.data.idToken,
-        //  expiresIn: response.data.expiresIn,
-        //  refreshToken: response.data.refreshToken
-      
-        //router.push('/');
       });
     },
+    guestlogin({ commit }){
+      axios.post(
+        '/auth/',
+        {
+          username: 'guest',
+          password: 'guest',
+          returnSecureToken: true
+        }
+      ).then((response) => {
+        commit('updateIdToken', response.data.token);
+        router.push('/after_auth');
+      });
+    },
+
     logout({ commit }) {
       commit('updateIdToken', null);
       //localStorage.removeItem('idToken');
