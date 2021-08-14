@@ -2,15 +2,6 @@
 
 while :
 do
-  if python /code2/manage.py makemigrations; then
-    break
-  else
-    sleep 1
-  fi
-done
-
-while :
-do
   if python /code2/manage.py migrate; then
     break
   else
