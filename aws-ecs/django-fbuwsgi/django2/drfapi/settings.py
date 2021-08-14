@@ -111,7 +111,7 @@ DATABASES = {
         'NAME': 'djangodb',
         'USER': 'django',
         'PASSWORD': 'djangodjango',
-        'HOST': 'database-test.cm2vwt1sehe0.us-east-1.rds.amazonaws.com',
+        'HOST': 'sample-db-0815.cm2vwt1sehe0.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }

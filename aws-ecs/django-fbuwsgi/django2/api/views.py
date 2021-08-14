@@ -9,6 +9,7 @@ from .serializers import TaskSerializer, UserSerializer
 from .ownpermissons import ProfilePermission
 from bs4 import BeautifulSoup
 from .models import kabu_db
+#predict_output
 import os
 import requests
 import re
@@ -328,7 +329,6 @@ def predict_reg(request):
     if request.method == "POST":
 
         json_str = request.body.decode("utf-8")
-        """
         json_data = json.loads(json_str)
 
         predict_date = json_data['predict_date']
@@ -336,7 +336,7 @@ def predict_reg(request):
         predict_value = json_data['value']
         predict_target = json_data['target']
         predict_user = json_data['user']
-        
+        """
         target_model = predict_output()
 
         target_model.predict_date = predict_date
@@ -356,7 +356,7 @@ def predict_reg(request):
 
 def predict_display(request):
     if request.method == "GET":
-        return HttpResponse("hello")
+        
         #target_k = request.GET['name_input']
         """
         with connection.cursor() as cursor:
@@ -380,3 +380,4 @@ def predict_display(request):
             
             json_rets = json.dumps(res_list, ensure_ascii=False)
             """
+        return HttpResponse("ok")
