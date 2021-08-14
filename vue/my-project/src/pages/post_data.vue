@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <h2>未来の株価予測</h2>
-
+  <h2>{{ login_name }}さん</h2>
   <div v-if="!show"> 
     <form class="post-form">
        <label for="user">{{datas_parse.name}}の株価を1年分のデータを元に予測します。</label>
@@ -32,7 +32,9 @@
       <div v-if="show">
         <h2>{{selected}}の予測が完了しました。</h2>
         <h3>銘柄名:{{datas_parse.name}} <br> 予測対象日時:{{resdata.date}} 値段:{{resdata.predict_target}}円</h3>
+        <button type="button" @click="predict_output_post()">予測結果を登録する</button>
       </div>
+      <button type="button" @click="predict_output_post()">予測結果を登録する</button>
     </transition>
 
 </div>
@@ -40,6 +42,7 @@
 
 <script>
 import axios from '../axios-for-predict.js';
+import axios2 from '../axios-for-auth';
 
 export default {  
   data() {
@@ -50,8 +53,27 @@ export default {
       resdata:"",
       show:false,
       selected: 'どの値を予測したいですか?',
-      loading: false
+      loading: false,
+      info: ''
     }
+  },
+  computed: {
+    idToken() {
+      return this.$store.getters.idToken;
+    },
+    login_name: function(){
+      return this.info != null ? this.info :''
+    }
+  },
+  created(){
+      axios2.get('/api/myself/',{
+          headers:{
+              Authorization: `Token ${this.idToken}`
+          }
+      })
+      .then((response) => {
+          this.info = response.data.username
+      })
   },
   methods: {
     data_post() {
@@ -77,7 +99,42 @@ export default {
           this.show = true;
         });
       }
+    },
+
+    token_log() {
+      console.log(`${this.idToken}`)
+        axios.get('/api/myself/',{
+            headers: {
+                Authorization: `Token ${this.idToken}`
+            }
+        })
+        .then((response) => {
+            console.log(response);       
+            //document.write('<p>'+ response.data + '</p>');
+            this.info = response.data.username
+        });
+    },
+    predict_output_post(){
+      //const date_now = Date.now();
+        axios2.post(
+            '/api/predict_reg/',
+        { 
+          'Content-Type': 'application/json',
+          predict_date:this.resdata.date,
+          name:this.datas_parse.name,
+          value:this.resdata.predict_target,
+          user:this.login_name,
+          target:this.selected,
+          //predict_date:'11-11',
+          //name:'test',
+          //value:'9999'
+        },
+        ).then((response) => {
+          console.log(response);
+        });
     }
+
+
   }
 };
 </script>

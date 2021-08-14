@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
 from api.views import TaskViewSet, UserViewSet, ManageUserView
-from api.views import loginfunc, input_func, search_value, search_values_1year, upload_file,CreateUserView,name_to_code,reserve_data
+from api.views import loginfunc, input_func, search_value, search_values_1year, upload_file,CreateUserView,name_to_code,reserve_data,predict_reg,predict_display
 
 
 router = routers.DefaultRouter()
@@ -21,4 +21,6 @@ urlpatterns = [
     path('register/', CreateUserView.as_view(), name='register'),
     path('serach_code/', name_to_code, name='serach_code'),
     path('reserve_data/', reserve_data, name='reserve'),
+    path('predict_reg/', predict_reg, name='predict_reg'),
+    path('predict_display/', predict_display, name='predict_display')
 ]

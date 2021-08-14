@@ -40,6 +40,7 @@
 
         <b-nav-item to="/post_data" class="header--link" v-if="isAuthenticated">株価予測</b-nav-item>
         <b-nav-item to="/search_code" class="header--link" v-if="isAuthenticated">コード検索</b-nav-item>
+        <b-nav-item to="/predict_display" class="header--link" v-if="isAuthenticated">予測結果掲示板</b-nav-item>
       </b-navbar-nav>
       
       <b-navbar-nav class="ml-auto">
