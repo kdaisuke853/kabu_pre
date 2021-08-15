@@ -8,7 +8,7 @@ from rest_framework import viewsets
 from .serializers import TaskSerializer, UserSerializer
 from .ownpermissons import ProfilePermission
 from bs4 import BeautifulSoup
-from .models import kabu_db
+from .models import kabu_db, predict_output
 import os
 import requests
 import re
@@ -335,7 +335,7 @@ def predict_reg(request):
         predict_value = json_data['value']
         predict_target = json_data['target']
         predict_user = json_data['user']
-        """
+
         target_model = predict_output()
 
         target_model.predict_date = predict_date
@@ -345,7 +345,6 @@ def predict_reg(request):
         target_model.target = predict_target
         #target_model.created_at = dt_now
         target_model.save()
-        """
         
         return HttpResponse(status=200)
     
@@ -357,7 +356,6 @@ def predict_display(request):
     if request.method == "GET":
         
         #target_k = request.GET['name_input']
-        """
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM api_predict_output")
             predict_datas = cursor.fetchall()
@@ -378,5 +376,5 @@ def predict_display(request):
                 res_list.append(res)
             
             json_rets = json.dumps(res_list, ensure_ascii=False)
-            """
-        return HttpResponse("ok")
+
+        return HttpResponse(json_rets)
