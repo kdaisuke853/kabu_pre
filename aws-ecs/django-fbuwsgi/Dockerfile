@@ -10,6 +10,7 @@ RUN pip install -r requirements.txt
 RUN conda install -c conda-forge uwsgi
 RUN conda install -c conda-forge libiconv
 RUN conda install -c conda-forge fbprophet
+RUN conda install -c anaconda mysql-connector-python
 ADD ./aws-ecs/django-fbuwsgi/django2 /code2/
 RUN mv -f hdays.py /opt/conda/lib/python3.7/site-packages/fbprophet/
 RUN chmod 755 /code2/docker-entrypoint.sh
