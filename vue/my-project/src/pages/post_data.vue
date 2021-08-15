@@ -1,7 +1,6 @@
 <template>
 <div class="container">
   <h2>未来の株価予測</h2>
-  <h2>{{ login_name }}さん</h2>
   <div v-if="!show"> 
     <form class="post-form">
        <label for="user">{{datas_parse.name}}の株価を1年分のデータを元に予測します。</label>
@@ -32,9 +31,10 @@
       <div v-if="show">
         <h2>{{selected}}の予測が完了しました。</h2>
         <h3>銘柄名:{{datas_parse.name}} <br> 予測対象日時:{{resdata.date}} 値段:{{resdata.predict_target}}円</h3>
-        <button type="button" @click="predict_output_post()">予測結果を登録する</button>
+        <div v-if="show2">
+            <button type="button" @click="predict_output_post()">予測結果を登録する</button>
+        </div> 
       </div>
-      <button type="button" @click="predict_output_post()">予測結果を登録する</button>
     </transition>
 
 </div>
@@ -52,6 +52,7 @@ export default {
       datas_parse:JSON.parse(localStorage.getItem('datalist')),
       resdata:"",
       show:false,
+      show2:false,
       selected: 'どの値を予測したいですか?',
       loading: false,
       info: ''
@@ -97,6 +98,7 @@ export default {
           localStorage.clear();
           this.loading = false;
           this.show = true;
+          this.show2 = true;
         });
       }
     },
@@ -131,6 +133,11 @@ export default {
         },
         ).then((response) => {
           console.log(response);
+          this.show2 = false;
+          this.$swal({
+          icon: 'success',
+          text: '登録に成功しました'
+          })
         });
     }
 
