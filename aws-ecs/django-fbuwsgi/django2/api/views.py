@@ -9,7 +9,6 @@ from .serializers import TaskSerializer, UserSerializer
 from .ownpermissons import ProfilePermission
 from bs4 import BeautifulSoup
 from .models import kabu_db
-#predict_output
 import os
 import requests
 import re
