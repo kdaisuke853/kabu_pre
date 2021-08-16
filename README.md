@@ -80,3 +80,7 @@ https://user-images.githubusercontent.com/80162502/128960211-d8c62845-c448-4386-
 
 ### ④株価予測機能  
 ![demo3](https://github.com/kdaisuke853/kabu_pre/blob/master/predict.gif)
+
+### 8/15 機能追加  
+### ⑤予測結果掲示板　　
+![demo４](https://github.com/kdaisuke853/kabu_pre/blob/master/keiji.gif)
