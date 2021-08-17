@@ -33,11 +33,11 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (ProfilePermission,)  # permissonは制限、allowanyは誰でも
-
+#ユーザー作成
 class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
-
+#ユーザ認証
 class ManageUserView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     authentication_classes = (TokenAuthentication,)
@@ -55,14 +55,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
 
-def loginfunc(request):
-    context = {
-        'message': '初めてのメッセージ',
-        'content': 'ようこそ、Djangoは楽しい！',
-    }
-    return render(request, 'login.html', {'context': context})
-
-
+#スクレイピングにより現在の株価取得
 def search_value(request):
     if request.method == "GET":
         # target = request.POST['code_input']
@@ -70,6 +63,7 @@ def search_value(request):
         print(target)
         target_url = 'https://www.nikkei.com/nkd/company/?scode={}'.format(target)
         r = requests.get(target_url)
+        #スクレイピング
         soup = BeautifulSoup(r.text, 'lxml')
 
         val = soup.find('dd', attrs={'class': 'm-stockPriceElm_value now'})
@@ -77,10 +71,10 @@ def search_value(request):
 
         time_now_bf = soup.find('dt', attrs={'class': 'm-stockPriceElm_title'})
         time_now_af = str(time_now_bf)
-
+        #取得した値を整形
         a = re.search(r'[0-9]*(,|[0-9])[0-9]*', val2)
         t = re.search(r'([0-9]*:[0-9]*)', time_now_af)
-
+       
         if re.search(r'[0-9]*(,|[0-9])[0-9]*', val2):
             target_val = a.group(0)
             time_now = t.group(0)
@@ -197,7 +191,7 @@ def reserve_data(request):
 
     else:
         return HttpResponse('データがありません')
-
+#yfinanceを用いた一年間の株価取得
 def search_values_1year(request):
     if request.method == "GET":
         target = request.GET['code_input']
@@ -226,7 +220,7 @@ def search_values_1year(request):
         
 
 
-
+    #yahoofinaceapi2を利用した1年間の株価取得(7月中旬からエラーが発生したため変更)
     """
     if request.method == "GET":
         target = request.GET['code_input']
@@ -277,7 +271,7 @@ def search_values_1year(request):
             pass
         return JsonResponse(ret_dict)
     """
-
+#銘柄表(コードと銘柄名を紐づけるもの)をアップロードする機能
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -305,6 +299,8 @@ def upload_file(request):
 
     return render(request, 'upload.html', {'form': form})
 
+
+#名前からコードを検索する機能
 def name_to_code(request):
     if request.method == "GET":
         target_k = request.GET['name_input']
