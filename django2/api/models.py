@@ -22,8 +22,18 @@ class FileNameModel(models.Model):
 class kabu_db(models.Model):
     code = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
-
     def __str__(self):
         return self.name
+
+class predict_output3(models.Model):
+    predict_date = models.CharField(max_length=50)
+    kabu_name = models.CharField(max_length=50)
+    kabu_value = models.CharField(max_length=50)
+    user_name = models.CharField(max_length=50)
+    target = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.predict_date
+
 
 # Create your models here.

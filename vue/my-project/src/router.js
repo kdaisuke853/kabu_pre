@@ -13,6 +13,7 @@ import sign_up from './pages/signup_post'
 import search_code from './pages/search_code'
 import candle from './pages/candlechart.vue'
 import Home from './pages/Home.vue'
+import predict_display from './pages/predict_display.vue'
 
 Vue.use(Router);
 
@@ -177,6 +178,17 @@ export default new Router({
     {
       path: "/search_code",
       component: search_code,
+      beforeEnter(to, from, next){
+        if (store.getters.idToken){
+          next();
+        } else {
+          next('/');
+        }
+      }
+    },
+    {
+      path: "/predict_display",
+      component: predict_display,
       beforeEnter(to, from, next){
         if (store.getters.idToken){
           next();

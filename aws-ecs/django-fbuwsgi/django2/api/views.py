@@ -8,7 +8,7 @@ from rest_framework import viewsets
 from .serializers import TaskSerializer, UserSerializer
 from .ownpermissons import ProfilePermission
 from bs4 import BeautifulSoup
-from .models import kabu_db
+from .models import kabu_db, predict_output
 import os
 import requests
 import re
@@ -322,3 +322,59 @@ def name_to_code(request):
 
             json_rets = json.dumps(res_list, ensure_ascii=False)
             return HttpResponse(json_rets)
+
+#予測したデータをmodelに登録
+def predict_reg(request):
+    if request.method == "POST":
+
+        json_str = request.body.decode("utf-8")
+        json_data = json.loads(json_str)
+
+        predict_date = json_data['predict_date']
+        predict_name = json_data['name']
+        predict_value = json_data['value']
+        predict_target = json_data['target']
+        predict_user = json_data['user']
+
+        target_model = predict_output()
+
+        target_model.predict_date = predict_date
+        target_model.kabu_name = predict_name
+        target_model.kabu_value = predict_value
+        target_model.user_name = predict_user
+        target_model.target = predict_target
+        #target_model.created_at = dt_now
+        target_model.save()
+        
+        return HttpResponse(status=200)
+    
+    else:
+        return HttpResponse(status=405)
+
+
+def predict_display(request):
+    if request.method == "GET":
+        
+        #target_k = request.GET['name_input']
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM api_predict_output")
+            predict_datas = cursor.fetchall()
+            res_list = []
+            for predict_data in predict_datas:
+                date_str = str(predict_data[6])
+                time_play = re.search(r'[0-9]*-[0-9][0-9]-[0-9][0-9]', date_str)
+                res = {
+                       'predict_date': predict_data[1],
+                       'Name': predict_data[2],
+                       'Value': predict_data[3],
+                       'User': predict_data[4],
+                       'target': predict_data[5],
+                       'predict_play_date':time_play.group(0)
+                       #'predict_play_date':str(predict_data[5])
+                       #'predict_play_date': predict_data[6]
+                       }
+                res_list.append(res)
+            
+            json_rets = json.dumps(res_list, ensure_ascii=False)
+
+        return HttpResponse(json_rets)

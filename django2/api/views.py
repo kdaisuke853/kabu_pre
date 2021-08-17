@@ -8,10 +8,11 @@ from rest_framework import viewsets
 from .serializers import TaskSerializer, UserSerializer
 from .ownpermissons import ProfilePermission
 from bs4 import BeautifulSoup
-from .models import kabu_db
+from .models import kabu_db,predict_output3
 import os
 import requests
 import re
+import datetime
 import csv, json
 from django.http.response import JsonResponse, HttpResponse
 #from yahoo_finance_api2 import share
@@ -202,13 +203,13 @@ def reserve_data(request):
         return HttpResponse('データがありません')
 """
 
+#一年分取得
 def search_values_1year(request):
     if request.method == "GET":
         try:
             target = request.GET['code_input']
 
-            #now = datetime.datetime.now()
-            #now = now.strftime("%y%m%d")
+            #yfinanceにて1年間の値を取得
             company_code = str(target) + '.T'
             target_name = yf.Ticker(company_code)
             target_data = target_name.history(period="1y")
@@ -280,7 +281,7 @@ def search_values_1year(request):
             pass
         return JsonResponse(ret_dict)
     """
-
+#CSVから株コードと銘柄名読み込み
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
@@ -308,6 +309,7 @@ def upload_file(request):
 
     return render(request, 'upload.html', {'form': form})
 
+
 def name_to_code(request):
     if request.method == "GET":
         target_k = request.GET['name_input']
@@ -321,6 +323,69 @@ def name_to_code(request):
                        'Code': code_data[0],
                        }
 
+                res_list.append(res)
+
+            json_rets = json.dumps(res_list, ensure_ascii=False)
+            return HttpResponse(json_rets)
+
+#予測したデータをmodelに登録
+def predict_reg(request):
+    if request.method == "POST":
+        # 受けとったデータを読み込む
+        #key_word = request.POST['name']
+        dt_now = datetime.datetime.now()
+        json_str = request.body.decode("utf-8")
+        json_data = json.loads(json_str)
+        #print(json_data)
+        predict_date = json_data['predict_date']
+        predict_name = json_data['name']
+        predict_value = json_data['value']
+        predict_target = json_data['target']
+        predict_user = json_data['user']
+        
+        """
+        print(predict_name)
+        print(predict_date)
+        print(predict_value)
+        print(predict_user)
+        print(predict_target)
+        """
+        target_model = predict_output3()
+
+        target_model.predict_date = predict_date
+        target_model.kabu_name = predict_name
+        target_model.kabu_value = predict_value
+        target_model.user_name = predict_user
+        target_model.target = predict_target
+        #target_model.created_at = dt_now
+        target_model.save()
+
+        
+        return HttpResponse(status=200)
+    
+    else:
+        return HttpResponse(status=405)
+    
+def predict_display(request):
+    if request.method == "GET":
+        #target_k = request.GET['name_input']
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM api_predict_output3")
+            predict_datas = cursor.fetchall()
+            res_list = []
+            for predict_data in predict_datas:
+                date_str = str(predict_data[6])
+                time_play = re.search(r'[0-9]*-[0-9][0-9]-[0-9][0-9]', date_str)
+                res = {
+                       'predict_date': predict_data[1],
+                       'Name': predict_data[2],
+                       'Value': predict_data[3],
+                       'User': predict_data[4],
+                       'target': predict_data[5],
+                       'predict_play_date':time_play.group(0)
+                       #'predict_play_date':str(predict_data[5])
+                       #'predict_play_date': predict_data[6]
+                       }
                 res_list.append(res)
 
             json_rets = json.dumps(res_list, ensure_ascii=False)
